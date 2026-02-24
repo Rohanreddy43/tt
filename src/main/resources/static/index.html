@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Habit Quest - Track Your Awesome Journey!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Nunito', 'Segoe UI', sans-serif;
+        }
+
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #2C3E50;
+            --light: #FFFFFF;
+            --success: #2ECC71;
+            --warning: #F39C12;
+            --danger: #E74C3C;
+            --purple: #9B59B6;
+            --pink: #FF69B4;
+            --coral: #FF7F50;
+            --sky: #87CEEB;
+        }
+
+        body { 
+            background: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 25%, #4ECDC4 50%, #9B59B6 75%, #FF69B4 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh; 
+            padding: 20px;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+
+        h1 { 
+            color: white; 
+            text-align: center; 
+            margin-bottom: 30px; 
+            font-size: 3rem; 
+            font-family: 'Fredoka', sans-serif;
+            text-shadow: 3px 3px 0px #FF6B6B, 6px 6px 0px #4ECDC4;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .card { 
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px; 
+            padding: 25px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #FF6B6B, #FFE66D, #4ECDC4, #9B59B6, #FF69B4);
+            border-radius: 28px;
+            z-index: -1;
+            background-size: 400% 400%;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        .card:hover {
+            transform: translateY(-5px) rotate(1deg);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        h2 { 
+            color: #2C3E50; 
+            margin-bottom: 20px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group { 
+            margin-bottom: 20px; 
+        }
+
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            color: #2C3E50; 
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        input, select, textarea { 
+            width: 100%; 
+            padding: 14px 18px; 
+            border: 3px solid #E0E0E0; 
+            border-radius: 15px; 
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: #FAFAFA;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #4ECDC4;
+            box-shadow: 0 0 0 4px rgba(78, 205, 196, 0.2);
+            transform: scale(1.02);
+        }
+
+        button { 
+            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+            color: white; 
+            border: none; 
+            padding: 14px 28px; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Nunito', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        button:hover { 
+            background: linear-gradient(45deg, #FF8E53, #FF6B6B);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        button:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        button.secondary { 
+            background: linear-gradient(45deg, #4ECDC4, #44A08D);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+        }
+
+        button.secondary:hover {
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.5);
+        }
+
+        button.danger { 
+            background: linear-gradient(45deg, #E74C3C, #C0392B);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .habit-item, .log-item { 
+            border: 2px solid #eee; 
+            padding: 18px; 
+            margin-bottom: 15px; 
+            border-radius: 15px; 
+            background: white;
+            transition: all 0.3s ease;
+            animation: slideIn 0.5s ease;
+        }
+
+        .habit-item:hover, .log-item:hover {
+            transform: translateX(10px);
+            border-color: #4ECDC4;
+            box-shadow: 0 5px 20px rgba(78, 205, 196, 0.3);
+        }
+
+        .habit-item { 
+            border-left: 5px solid #FF6B6B;
+            background: linear-gradient(135deg, #fff 0%, #FFF5F5 100%);
+        }
+
+        .log-item { 
+            border-left: 5px solid #2ECC71;
+            background: linear-gradient(135deg, #fff 0%, #F0FFF4 100%);
+        }
+
+        .log-item.missed { 
+            border-left-color: #E74C3C;
+            background: linear-gradient(135deg, #fff 0%, #FFF5F5 100%);
+        }
+
+        .log-item.conflicting { 
+            border-left-color: #F39C12;
+            background: linear-gradient(135deg, #fff 0%, #FFFEF5 100%);
+        }
+
+        .badge { 
+            display: inline-block; 
+            padding: 6px 14px; 
+            border-radius: 50px; 
+            font-size: 12px; 
+            margin-left: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-daily { 
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .badge-weekly { 
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            color: white;
+        }
+
+        .badge-monthly { 
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+        }
+
+        .badge-completed {
+            background: linear-gradient(45deg, #2ECC71, #27AE60);
+            color: white;
+        }
+
+        .badge-missed {
+            background: linear-gradient(45deg, #E74C3C, #C0392B);
+            color: white;
+        }
+
+        .badge-conflicting {
+            background: linear-gradient(45deg, #F39C12, #E67E22);
+            color: white;
+        }
+
+        .analysis { 
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
+            padding: 20px; 
+            border-radius: 20px; 
+            margin-top: 20px;
+            border: 2px solid #dee2e6;
+        }
+
+        .score { 
+            font-size: 3rem; 
+            font-weight: 800; 
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #FFE66D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .recommendation { 
+            margin-top: 15px; 
+            padding: 15px; 
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            border-radius: 15px;
+            border: 2px solid #FFE082;
+        }
+
+        .recommendation ul {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .recommendation li {
+            margin-bottom: 8px;
+            color: #5D4037;
+        }
+
+        .tabs { 
+            display: flex; 
+            margin-bottom: 25px; 
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tab { 
+            padding: 14px 28px; 
+            background: rgba(255,255,255,0.3); 
+            color: white; 
+            border: 3px solid transparent;
+            cursor: pointer; 
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab:hover {
+            background: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+
+        .tab.active { 
+            background: white; 
+            color: #FF6B6B;
+            border-color: #FF6B6B;
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .tab-content { 
+            display: none; 
+        }
+
+        .tab-content.active { 
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        .auth-container { 
+            max-width: 450px; 
+            margin: 80px auto; 
+        }
+
+        .auth-toggle { 
+            text-align: center; 
+            margin-top: 20px;
+            color: #2C3E50;
+        }
+
+        .auth-toggle a { 
+            color: #FF6B6B;
+            cursor: pointer;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .auth-toggle a:hover {
+            color: #FF8E53;
+            text-decoration: underline;
+        }
+
+        .user-info { 
+            color: white; 
+            text-align: right; 
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .error { 
+            color: #E74C3C; 
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #FDECEA;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .success { 
+            color: #2ECC71; 
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #E8F8F0;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* Funckey decorative elements */
+        .decoration {
+            position: fixed;
+            font-size: 2rem;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .decoration:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .decoration:nth-child(2) { top: 20%; right: 10%; animation-delay: 1s; }
+        .decoration:nth-child(3) { bottom: 30%; left: 8%; animation-delay: 2s; }
+        .decoration:nth-child(4) { bottom: 15%; right: 5%; animation-delay: 0.5s; }
+
+        /* Habit streak indicator */
+        .streak {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .streak-fire {
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        /* Progress bar */
+        .progress-container {
+            background: #E0E0E0;
+            border-radius: 50px;
+            height: 20px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #2ECC71, #4ECDC4, #FF6B6B);
+            border-radius: 50px;
+            transition: width 0.5s ease;
+            background-size: 200% 100%;
+            animation: gradientShift 2s linear infinite;
+        }
+
+        /* Empty state fun */
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #95A5A6;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Title with emoji */
+        .title-emoji {
+            display: inline-block;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        /* Action type colors for logs */
+        .action-icon {
+            font-size: 1.2rem;
+            margin-right: 5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .card { padding: 20px; border-radius: 20px; }
+            .tabs { justify-content: center; }
+            .tab { padding: 10px 20px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative elements -->
+    <div class="decoration">🌟</div>
+    <div class="decoration">✨</div>
+    <div class="decoration">🎯</div>
+    <div class="decoration">💫</div>
+
+    <!-- Login/Register View -->
+    <div id="authView" class="container">
+        <div class="auth-container">
+            <div class="card" style="text-align: center;">
+                <h2 style="justify-content: center; font-size: 2rem;">
+                    <span class="title-emoji">🚀</span> 
+                    <span id="authTitle">Welcome Back!</span>
+                </h2>
+                <div id="authMessage"></div>
+                <div class="form-group">
+                    <label>👤 Username</label>
+                    <input type="text" id="authUsername" placeholder="Enter your awesome username">
+                </div>
+                <div class="form-group" id="emailGroup" style="display: none;">
+                    <label>📧 Email</label>
+                    <input type="email" id="authEmail" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>🔑 Password</label>
+                    <input type="password" id="authPassword" placeholder="Enter your secret password">
+                </div>
+                <button onclick="handleAuth()" id="authButton" style="width: 100%;">
+                    <span id="authButtonText">Let's Go!</span>
+                </button>
+                <div class="auth-toggle">
+                    <span id="authToggleText">New here? </span>
+                    <a onclick="toggleAuthMode()" id="authToggleLink">Create an account!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App View -->
+    <div id="mainView" class="container" style="display: none;">
+        <h1><span class="title-emoji">🎯</span> Habit Quest <span class="title-emoji">🌟</span></h1>
+        <div class="user-info">
+            <span>👋 Hey there, <strong id="currentUsername">Champion</strong>!</span>
+            <button onclick="logout()" style="padding: 8px 16px; font-size: 13px; margin-left: 15px;">🚪 Logout</button>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('habits')">📋 My Habits</button>
+            <button class="tab" onclick="showTab('logs')">📝 Log Activity</button>
+            <button class="tab" onclick="showTab('analysis')">📊 My Stats</button>
+        </div>
+
+        <!-- Habits Tab -->
+        <div id="habits" class="tab-content active">
+            <div class="card">
+                <h2>➕ <span style="background: linear-gradient(45deg, #FF6B6B, #FFE66D); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Create New Habit</span></h2>
+                <div class="form-group">
+                    <label>💪 Habit Name</label>
+                    <input type="text" id="habitName" placeholder="e.g., Exercise Daily, Read Books, Meditate...">
+                </div>
+                <div class="form-group">
+                    <label>📖 Description</label>
+                    <textarea id="habitDescription" rows="2" placeholder="Why is this habit important to you?"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>📅 Frequency</label>
+                    <select id="habitFrequency">
+                        <option value="DAILY">☀️ Daily</option>
+                        <option value="WEEKLY">📆 Weekly</option>
+                        <option value="MONTHLY">🗓️ Monthly</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>✅ Expected Behavior</label>
+                    <input type="text" id="habitExpected" placeholder="What should you do?">
+                </div>
+                <div class="form-group">
+                    <label>⚡ Conflicting Behavior</label>
+                    <input type="text" id="habitConflicting" placeholder="What do you usually do instead?">
+                </div>
+                <button onclick="createHabit()">✨ Create Habit</button>
+            </div>
+            
+            <div class="card">
+                <h2>📋 <span style="background: linear-gradient(45deg, #4ECDC4, #44A08D); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Your Habits</span></h2>
+                <div id="habitsList"></div>
+            </div>
+        </div>
+
+        <!-- Behavior Logs Tab -->
+        <div id="logs" class="tab-content">
+            <div class="card">
+                <h2>📝 <span style="background: linear-gradient(45deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Log Your Activity</span></h2>
+                <div class="form-group">
+                    <label>🎯 Select Habit</label>
+                    <select id="logHabitId"></select>
+                </div>
+                <div class="form-group">
+                    <label>💫 What did you do?</label>
+                    <input type="text" id="logAction" placeholder="Describe your action...">
+                </div>
+                <div class="form-group">
+                    <label>🏷️ Action Type</label>
+                    <select id="logActionType">
+                        <option value="COMPLETED">✅ Completed - Nailed it!</option>
+                        <option value="MISSED">❌ Missed - Try again tomorrow</option>
+                        <option value="CONFLICTING">⚠️ Conflicting - Had a struggle</option>
+                        <option value="NEUTRAL">➖ Neutral - Just did it</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>📝 Notes</label>
+                    <textarea id="logNotes" rows="2" placeholder="Any thoughts or feelings?"></textarea>
+                </div>
+                <button onclick="createLog()">🚀 Log It!</button>
+            </div>
+            
+            <div class="card">
+                <h2>📊 <span style="background: linear-gradient(45deg, #F39C12, #E74C3C); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Recent Activities</span></h2>
+                <div id="logsList"></div>
+            </div>
+        </div>
+
+        <!-- Analysis Tab -->
+        <div id="analysis" class="tab-content">
+            <div class="card">
+                <h2>📈 <span style="background: linear-gradient(45deg, #2ECC71, #4ECDC4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Your Progress</span></h2>
+                <div class="form-group">
+                    <label>🎯 Choose a Habit to Analyze</label>
+                    <select id="analysisHabitId" onchange="getAnalysis()"></select>
+                </div>
+                <button onclick="getAnalysis()" class="secondary">🔄 Refresh Stats</button>
+                <div id="analysisResult"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8080/api';
+        let isLoginMode = true;
+        let authToken = localStorage.getItem('token');
+
+        // Check if user is logged in
+        function checkAuth() {
+            if (authToken) {
+                document.getElementById('authView').style.display = 'none';
+                document.getElementById('mainView').style.display = 'block';
+                loadHabits();
+            } else {
+                document.getElementById('authView').style.display = 'block';
+                document.getElementById('mainView').style.display = 'none';
+            }
+        }
+
+        function toggleAuthMode() {
+            isLoginMode = !isLoginMode;
+            document.getElementById('authTitle').innerText = isLoginMode ? 'Welcome Back!' : 'Join the Quest!';
+            document.getElementById('authButtonText').innerText = isLoginMode ? "Let's Go! 🚀" : "Start Adventure! 🎉";
+            document.getElementById('authToggleText').innerText = isLoginMode ? "New here? " : "Already playing? ";
+            document.getElementById('authToggleLink').innerText = isLoginMode ? "Create an account!" : "Login here!";
+            document.getElementById('emailGroup').style.display = isLoginMode ? 'none' : 'block';
+            document.getElementById('authMessage').innerHTML = '';
+        }
+
+        async function handleAuth() {
+            const username = document.getElementById('authUsername').value;
+            const password = document.getElementById('authPassword').value;
+            const email = document.getElementById('authEmail').value;
+            
+            if (!username || !password) {
+                document.getElementById('authMessage').innerHTML = '<p class="error">⚠️ Please fill in all the fields!</p>';
+                return;
+            }
+
+            const endpoint = isLoginMode ? '/auth/login' : '/auth/register';
+            const body = isLoginMode 
+                ? { username, password }
+                : { username, password, email, fullName: username };
+
+            try {
+                const res = await fetch(`${API_BASE}${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('username', data.username);
+                    authToken = data.token;
+                    document.getElementById('currentUsername').innerText = data.username;
+                    checkAuth();
+                } else {
+                    document.getElementById('authMessage').innerHTML = '<p class="error">😕 ' + (data.message || 'Authentication failed') + '</p>';
+                }
+            } catch (e) {
+                document.getElementById('authMessage').innerHTML = '<p class="error">🌐 Connection error - Is the server running?</p>';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('username');
+            authToken = null;
+            checkAuth();
+        }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+            if(tabId === 'habits') loadHabits();
+            if(tabId === 'logs') { loadHabitsForSelect(); loadLogs(); }
+            if(tabId === 'analysis') loadHabitsForAnalysis();
+        }
+
+        async function createHabit() {
+            const data = {
+                name: document.getElementById('habitName').value,
+                description: document.getElementById('habitDescription').value,
+                frequency: document.getElementById('habitFrequency').value,
+                expectedBehavior: document.getElementById('habitExpected').value,
+                conflictingBehavior: document.getElementById('habitConflicting').value
+            };
+
+            if (!data.name.trim()) {
+                alert('🎯 Please give your habit a name!');
+                return;
+            }
+            
+            const res = await fetch(`${API_BASE}/habits`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                },
+                body: JSON.stringify(data)
+            });
+            
+            if(res.ok) {
+                alert('🎉 Awesome! New habit created!');
+                document.getElementById('habitName').value = '';
+                document.getElementById('habitDescription').value = '';
+                document.getElementById('habitExpected').value = '';
+                document.getElementById('habitConflicting').value = '';
+                loadHabits();
+            } else {
+                alert('😕 Oops! Error creating habit');
+            }
+        }
+
+        async function loadHabits() {
+            const res = await fetch(`${API_BASE}/habits`, {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            });
+            const habits = await res.json();
+            const container = document.getElementById('habitsList');
+            
+            if(habits.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🌱</div>
+                        <p>No habits yet. Start your journey by creating your first habit above!</p>
+                    </div>`;
+                return;
+            }
+            
+            container.innerHTML = habits.map(h => `
+                <div class="habit-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <strong style="font-size: 1.1rem;">${h.name}</strong>
+                        <span class="badge badge-${h.frequency.toLowerCase()}">${h.frequency}</span>
+                    </div>
+                    <p style="margin-top: 8px; color: #666;">${h.description || 'No description'}</p>
+                    <div style="margin-top: 10px; font-size: 0.9rem; color: #888;">
+                        <span>✅ Should: ${h.expectedBehavior || 'N/A'}</span>
+                        ${h.conflictingBehavior ? `<span style="margin-left: 15px;">⚡ Often: ${h.conflictingBehavior}</span>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function loadHabitsForSelect() {
+            const res = await fetch(`${API_BASE}/habits`, {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            });
+            const habits = await res.json();
+            const select = document.getElementById('logHabitId');
+            
+            if (habits.length === 0) {
+                select.innerHTML = '<option value="">🌱 No habits - create one first!</option>';
+                return;
+            }
+            
+            select.innerHTML = habits.map(h => `<option value="${h.id}">${h.name}</option>`).join('');
+        }
+
+        async function loadHabitsForAnalysis() {
+            const res = await fetch(`${API_BASE}/habits`, {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            });
+            const habits = await res.json();
+            const select = document.getElementById('analysisHabitId');
+            select.innerHTML = habits.map(h => `<option value="${h.id}">${h.name}</option>`).join('');
+            if(habits.length > 0) getAnalysis();
+        }
+
+        async function createLog() {
+            const habitId = document.getElementById('logHabitId').value;
+            const action = document.getElementById('logAction').value;
+            
+            if (!habitId) {
+                alert('🎯 Please create a habit first!');
+                return;
+            }
+            
+            if (!action.trim()) {
+                alert('💫 Tell us what you did!');
+                return;
+            }
+            
+            const timestamp = new Date().toISOString();
+            const data = {
+                habitId: parseInt(habitId),
+                action: action,
+                actionType: document.getElementById('logActionType').value,
+                notes: document.getElementById('logNotes').value,
+                timestamp: timestamp
+            };
+            
+            const res = await fetch(`${API_BASE}/behavior-logs`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                },
+                body: JSON.stringify(data)
+            });
+            
+            if(res.ok) {
+                alert('📝 Activity logged! Great job!');
+                document.getElementById('logAction').value = '';
+                document.getElementById('logNotes').value = '';
+                loadLogs();
+            } else {
+                alert('😕 Oops! Error logging activity');
+            }
+        }
+
+        async function loadLogs() {
+            const res = await fetch(`${API_BASE}/behavior-logs`, {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            });
+            const logs = await res.json();
+            const container = document.getElementById('logsList');
+            
+            if(logs.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📝</div>
+                        <p>No activities logged yet. Start tracking your habits!</p>
+                    </div>`;
+                return;
+            }
+
+            const getActionIcon = (type) => {
+                switch(type) {
+                    case 'COMPLETED': return '✅';
+                    case 'MISSED': return '❌';
+                    case 'CONFLICTING': return '⚡';
+                    default: return '➖';
+                }
+            };
+            
+            container.innerHTML = logs.map(l => `
+                <div class="log-item ${l.actionType ? l.actionType.toLowerCase() : 'neutral'}">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <strong style="font-size: 1rem;">
+                            <span class="action-icon">${getActionIcon(l.actionType)}</span>
+                            ${l.action}
+                        </strong>
+                        <span class="badge badge-${l.actionType ? l.actionType.toLowerCase() : 'neutral'}">${l.actionType || 'NEUTRAL'}</span>
+                    </div>
+                    <div style="margin-top: 8px;">
+                        <span class="badge badge-daily">${l.habitName || 'Unknown Habit'}</span>
+                    </div>
+                    ${l.notes ? `<p style="margin-top: 8px; color: #666; font-style: italic;">"${l.notes}"</p>` : ''}
+                    <small style="color: #999; display: block; margin-top: 8px;">🕐 ${new Date(l.timestamp).toLocaleString()}</small>
+                </div>
+            `).join('');
+        }
+
+        async function getAnalysis() {
+            const habitId = document.getElementById('analysisHabitId').value;
+            const resultDiv = document.getElementById('analysisResult');
+            
+            if(!habitId) {
+                resultDiv.innerHTML = '<p>🎯 Please select a habit first.</p>';
+                return;
+            }
+            
+            try {
+                const res = await fetch(`${API_BASE}/contradictions/habit/${habitId}/analysis`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                
+                if (!res.ok) {
+                    resultDiv.innerHTML = '<p class="error">😕 Error loading analysis</p>';
+                    return;
+                }
+                
+                const data = await res.json();
+                
+                if (!data.habitName) {
+                    resultDiv.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📊</div>
+                            <p>No analysis data available yet. Start logging your behaviors!</p>
+                        </div>`;
+                    return;
+                }
+
+                const score = data.consistencyScore || 0;
+                const scoreEmoji = score >= 80 ? '🌟' : score >= 60 ? '👍' : score >= 40 ? '💪' : 'Keep going!';
+                
+                resultDiv.innerHTML = `
+                    <div class="analysis">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 15px;">${data.habitName || 'Unknown'} ${scoreEmoji}</h3>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: ${score}%"></div>
+                        </div>
+                        
+                        <p style="margin-top: 15px;">📊 <strong>Total Activities:</strong> ${data.totalBehaviorLogs || 0}</p>
+                        <p>✅ <strong>Nailed It:</strong> ${data.completedActions || 0}</p>
+                        <p>❌ <strong>Missed:</strong> ${data.missedActions || 0}</p>
+                        <p>⚡ <strong>Struggled:</strong> ${data.conflictingActions || 0}</p>
+                        
+                        <p class="score">${score}% Consistency!</p>
+                        
+                        ${(data.recommendations && data.recommendations.length > 0) ? `
+                        <div class="recommendation">
+                            <strong>💡 Tips for You:</strong>
+                            <ul>${data.recommendations.map(r => `<li>${r}</li>`).join('')}</ul>
+                        </div>
+                        ` : ''}
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Analysis error:', error);
+                resultDiv.innerHTML = '<p class="error">😕 Error loading analysis. Please try again.</p>';
+            }
+        }
+
+        // Check auth on load
+        if (localStorage.getItem('username')) {
+            document.getElementById('currentUsername').innerText = localStorage.getItem('username');
+        }
+        checkAuth();
+    </script>
+</body>
+</html>

@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: tt
-    runtime: java
-    buildCommand: ./mvnw package -DskipTests
-    startCommand: java -jar target/demo-0.0.1-SNAPSHOT.jar
-    envVars:
-      - key: JAVA_VERSION
-        value: 17

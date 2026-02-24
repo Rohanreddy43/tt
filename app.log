@@ -1,0 +1,97 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< com.example:demo >--------------------------
+[INFO] Building demo 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.5:run (default-cli) > test-compile @ demo >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ demo ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ demo ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ demo ---
+[INFO] skip non existing resourceDirectory /Users/gunreddyrohanreddy/Downloads/demo/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ demo ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] <<< spring-boot:3.2.5:run (default-cli) < test-compile @ demo <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.5:run (default-cli) @ demo ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2026-02-23T14:29:13.338+05:30  INFO 37594 --- [demo] [           main] com.example.demo.DemoApplication         : Starting DemoApplication using Java 25.0.2 with PID 37594 (/Users/gunreddyrohanreddy/Downloads/demo/target/classes started by gunreddyrohanreddy in /Users/gunreddyrohanreddy/Downloads/demo)
+2026-02-23T14:29:13.339+05:30  INFO 37594 --- [demo] [           main] com.example.demo.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
+2026-02-23T14:29:13.523+05:30  INFO 37594 --- [demo] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-23T14:29:13.572+05:30  INFO 37594 --- [demo] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 46 ms. Found 4 JPA repository interfaces.
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/gunreddyrohanreddy/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.20/tomcat-embed-core-10.1.20.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+2026-02-23T14:29:13.718+05:30  INFO 37594 --- [demo] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-02-23T14:29:13.722+05:30  INFO 37594 --- [demo] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-23T14:29:13.722+05:30  INFO 37594 --- [demo] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-02-23T14:29:13.735+05:30  INFO 37594 --- [demo] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-23T14:29:13.736+05:30  INFO 37594 --- [demo] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 383 ms
+2026-02-23T14:29:13.774+05:30  INFO 37594 --- [demo] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-23T14:29:13.785+05:30  INFO 37594 --- [demo] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-02-23T14:29:13.792+05:30  INFO 37594 --- [demo] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-23T14:29:13.846+05:30  INFO 37594 --- [demo] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-23T14:29:13.855+05:30  INFO 37594 --- [demo] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-23T14:29:13.908+05:30  INFO 37594 --- [demo] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:habitdb user=SA
+2026-02-23T14:29:13.908+05:30  INFO 37594 --- [demo] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-23T14:29:13.914+05:30  WARN 37594 --- [demo] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-23T14:29:14.169+05:30  INFO 37594 --- [demo] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists behavior_logs cascade 
+Hibernate: drop table if exists contradictions cascade 
+Hibernate: drop table if exists habit_declarations cascade 
+Hibernate: drop table if exists users cascade 
+Hibernate: create table behavior_logs (habit_id bigint not null, id bigint generated by default as identity, logged_at timestamp(6), timestamp timestamp(6) not null, user_id bigint not null, action varchar(255) not null, action_type varchar(255) check (action_type in ('COMPLETED','MISSED','CONFLICTING','NEUTRAL')), notes TEXT, primary key (id))
+Hibernate: create table contradictions (behavior_log_id bigint, detected_at timestamp(6), habit_id bigint not null, id bigint generated by default as identity, user_id bigint not null, contradiction_type varchar(255) not null check (contradiction_type in ('MISSED_ROUTINE','BROKEN_COMMITMENT','CONFLICTING_ACTION','INCONSISTENT_BEHAVIOR','PATTERN_VIOLATION')), description TEXT not null, recommendation TEXT, severity varchar(255) check (severity in ('LOW','MEDIUM','HIGH')), primary key (id))
+Hibernate: create table habit_declarations (is_active boolean, created_at timestamp(6), id bigint generated by default as identity, updated_at timestamp(6), user_id bigint not null, conflicting_behavior TEXT, description TEXT, expected_behavior TEXT, frequency varchar(255) not null check (frequency in ('DAILY','WEEKLY','MONTHLY')), name varchar(255) not null, primary key (id))
+Hibernate: create table users (enabled boolean not null, created_at timestamp(6), id bigint generated by default as identity, updated_at timestamp(6), email varchar(255) not null unique, full_name varchar(255), password varchar(255) not null, role varchar(255) check (role in ('USER','ADMIN')), username varchar(255) not null unique, primary key (id))
+Hibernate: alter table if exists behavior_logs add constraint FKfwjevji5u83kjsfp9a0wnaw6p foreign key (user_id) references users
+Hibernate: alter table if exists contradictions add constraint FKixv6cisqd2gjt01hvf9m8gqbe foreign key (user_id) references users
+Hibernate: alter table if exists habit_declarations add constraint FKqwdm4p7bfvxn36pymcpkcyu25 foreign key (user_id) references users
+2026-02-23T14:29:14.186+05:30  INFO 37594 --- [demo] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-23T14:29:14.296+05:30  INFO 37594 --- [demo] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-23T14:29:14.422+05:30  WARN 37594 --- [demo] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-23T14:29:14.444+05:30  INFO 37594 --- [demo] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-02-23T14:29:14.495+05:30  INFO 37594 --- [demo] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5d5b07e9, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@cc81cb3, org.springframework.security.web.context.SecurityContextHolderFilter@466a5b80, org.springframework.security.web.header.HeaderWriterFilter@2181144e, org.springframework.web.filter.CorsFilter@78ba0a57, org.springframework.security.web.authentication.logout.LogoutFilter@689504b1, com.example.demo.config.JwtAuthenticationFilter@1f370472, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@19cee7ed, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4e8e0052, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@33ea437a, org.springframework.security.web.session.SessionManagementFilter@c88a842, org.springframework.security.web.access.ExceptionTranslationFilter@38159192, org.springframework.security.web.access.intercept.AuthorizationFilter@6b174aa3]
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by io.netty.util.internal.PlatformDependent0$4 (file:/Users/gunreddyrohanreddy/.m2/repository/io/netty/netty-common/4.1.109.Final/netty-common-4.1.109.Final.jar)
+WARNING: Please consider reporting this to the maintainers of class io.netty.util.internal.PlatformDependent0$4
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+2026-02-23T14:29:14.571+05:30  INFO 37594 --- [demo] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-02-23T14:29:14.574+05:30  INFO 37594 --- [demo] [           main] com.example.demo.DemoApplication         : Started DemoApplication in 1.332 seconds (process running for 1.43)
+2026-02-23T14:30:50.876+05:30  INFO 37594 --- [demo] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-23T14:30:50.877+05:30  INFO 37594 --- [demo] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-23T14:30:50.877+05:30  INFO 37594 --- [demo] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  04:07 min
+[INFO] Finished at: 2026-02-23T14:33:19+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.5:run (default-cli) on project demo: Process terminated with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
